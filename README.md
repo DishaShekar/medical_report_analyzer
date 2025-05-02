@@ -24,9 +24,6 @@ medical_report_analyzer/
 ├── requirements.txt # List of required Python packages
 └── README.md # Project overview (this file)
 
-yaml
-Copy
-Edit
 
 ---
 
@@ -39,15 +36,10 @@ pip install -r requirements.txt
 If you don't have requirements.txt, you can create it using pip freeze > requirements.txt.
 
 2. 🚀 Start the FastAPI Server
-bash
-Copy
-Edit
 uvicorn backend:app --host 127.0.0.1 --port 8000 --reload
 Then open your browser and visit:
 
-arduino
-Copy
-Edit
+
 http://127.0.0.1:8000/docs
 You’ll see the Swagger UI where you can test the API.
 
