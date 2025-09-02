@@ -12,13 +12,26 @@ def summarize_report(report_text):
     return summary[0]["summary_text"]
 
 def predict_condition(report_text):
-    """Predicts possible medical conditions based on the report text."""
     condition_labels = [
-        "Pneumonia", "Chronic Kidney Disease", "Heart Disease", "Lung Infection",
-        "Fracture", "Arthritis", "Diabetes", "Hypertension","jaundice","malaria","dengue","typhoid","chickenpox","measles","hepatitis","tuberculosis","asthma","bronchitis","cancer","stroke","ulcer","appendicitis","diarrhea","constipation","food poisoning","hepatitis","migraine","sinusitis","tonsillitis"
+        "Flu", "Pneumonia", "Chronic Kidney Disease", "Heart Disease",
+        "Lung Infection", "Fracture", "Arthritis", "Diabetes", "Hypertension",
+        "Jaundice", "Malaria", "Dengue", "Typhoid", "Chickenpox", "Measles",
+        "Hepatitis", "Tuberculosis", "Asthma", "Bronchitis", "Cancer", "Stroke",
+        "Ulcer", "Appendicitis", "Diarrhea", "Constipation", "Food Poisoning",
+        "Migraine", "Sinusitis", "Tonsillitis"
     ]
+
     result = classifier(report_text, candidate_labels=condition_labels)
-    return result["labels"][0]  # Top predicted condition
+
+    top_label = result["labels"][0]
+    top_score = result["scores"][0]
+
+    # 👇 Threshold logic: if model is not confident enough, return "None"
+    if top_score < 0.5:
+        return "None"
+    else:
+        return top_label
+
 
 if __name__ == "__main__":
     # Test with sample report
